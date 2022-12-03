@@ -1,9 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Disassemblers;
+﻿using AdventOfCode.Helpers;
 
-
-[MemoryDiagnoser]
-public class DayTwo
+public class Day_2 : BaseDay, IDay
 {
     struct Match
     {
@@ -67,37 +64,25 @@ public class DayTwo
         };
     }
 
-    public static int ProcessMatchOne()
+    public object PerformPartOne()
     {
         static IEnumerable<Match> GetMatches(string fileName)
             => File.ReadAllText(fileName)
                 .Split("\r\n")
                 .Select(f => Match.FromOne(f.Remove(1, 1).ToArray()));
 
-        return GetMatches("DayTwo.txt")
+        return GetMatches(InputPath)
             .Sum(m => m.BaseScore + m.ResolveMatchScore());
     }
 
-    public static int ProcessMatchTwo()
+    public object PerformPartTwo()
     {
         static IEnumerable<Match> GetMatches(string fileName)
             => File.ReadAllText(fileName)
                 .Split("\r\n")
                 .Select(f => Match.FromTwo(f.Remove(1, 1).ToArray()));
 
-        return GetMatches("DayTwo.txt")
+        return GetMatches(InputPath)
             .Sum(m => m.BaseScore + m.ResolveMatchScore());
-    }
-
-    [Benchmark]
-    public void BenchmarkOne()
-    {
-        var result = ProcessMatchOne();
-    }
-
-    [Benchmark]
-    public void BenchmarkTwo()
-    {
-        var result = ProcessMatchTwo();
     }
 }

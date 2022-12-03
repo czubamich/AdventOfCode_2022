@@ -12,16 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DayOne.txt">
+    <Resource Include="Data\Day_1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DayTwo.txt">
+    <None Update="Data\Day_2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="DayOne.txt">
+    <None Update="Data\Day_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
