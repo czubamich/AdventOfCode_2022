@@ -9,7 +9,6 @@ public class Day_2 : BaseDay, IDay
         const char Noz = 'C';
 
         const char Prz = 'X';
-        const char Rem = 'Y';
         const char Wyg = 'Z';
 
         char[] XX;
@@ -23,6 +22,8 @@ public class Day_2 : BaseDay, IDay
 
         public static Match FromTwo(char[] X) => new Match(new[] { X[0], ResolveStrategy(X) });
 
+        public int TotalScore => BaseScore + ResolveMatchScore();
+
         public int BaseScore => B switch
         {
             Kam => 1,
@@ -31,18 +32,13 @@ public class Day_2 : BaseDay, IDay
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        public int ResolveMatchScore()
+        public int ResolveMatchScore() => A == B ? 3 : XX switch 
         {
-            if (A == B)
-                return 3;
-
-            if ((A == Pap && B == Noz)
-                || (A == Kam && B == Pap)
-                || (A == Noz && B == Kam))
-                return 6;
-
-            return 0;
-        }
+            [Pap, Noz] => 6,
+            [Kam, Pap] => 6,
+            [Noz, Kam] => 6,
+            _ => 0,
+        };
 
         private static char ResolveStrategy(char[] AM) => AM switch
         {
@@ -57,32 +53,27 @@ public class Day_2 : BaseDay, IDay
 
         private static char Translate(char X) => X switch
         {
-            'X' => 'A',
-            'Y' => 'B',
-            'Z' => 'C',
+            'X' => Kam,
+            'Y' => Pap,
+            'Z' => Noz,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
     public object PerformPartOne()
     {
-        static IEnumerable<Match> GetMatches(string fileName)
-            => File.ReadAllText(fileName)
-                .Split("\r\n")
-                .Select(f => Match.FromOne(f.Remove(1, 1).ToArray()));
-
-        return GetMatches(InputPath)
-            .Sum(m => m.BaseScore + m.ResolveMatchScore());
+        return GetData(InputPath)
+            .Select(Match.FromOne)
+            .Sum(m => m.TotalScore);
     }
 
     public object PerformPartTwo()
     {
-        static IEnumerable<Match> GetMatches(string fileName)
-            => File.ReadAllText(fileName)
-                .Split("\r\n")
-                .Select(f => Match.FromTwo(f.Remove(1, 1).ToArray()));
-
-        return GetMatches(InputPath)
-            .Sum(m => m.BaseScore + m.ResolveMatchScore());
+        return GetData(InputPath)
+            .Select(Match.FromTwo)
+            .Sum(m => m.TotalScore);
     }
+
+    IEnumerable<char[]> GetData(string fileName)
+            => InputAsLines.Select(s => s.Remove(1,1).ToArray());
 }

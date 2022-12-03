@@ -4,11 +4,11 @@ public class Day_ : BaseDay, IDay
 {
     public object PerformPartOne()
     {
-        throw new NotImplementedException();
+        return "To be done";
     }
 
     public object PerformPartTwo()
     {
-        throw new NotImplementedException();
+        return "To be done";
     }
 }

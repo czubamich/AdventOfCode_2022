@@ -1,6 +1,1 @@
-﻿
-
-
-
-
-AdventOfCodeRunner.Run<Day_2>();
+﻿AdventOfCodeRunner.Run<Day_3>();
