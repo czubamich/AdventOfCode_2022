@@ -62,18 +62,18 @@ public class Day_2 : BaseDay, IDay
 
     public object PerformPartOne()
     {
-        return GetData(InputPath)
+        return GetData()
             .Select(Match.FromOne)
             .Sum(m => m.TotalScore);
     }
 
     public object PerformPartTwo()
     {
-        return GetData(InputPath)
+        return GetData()
             .Select(Match.FromTwo)
             .Sum(m => m.TotalScore);
     }
 
-    IEnumerable<char[]> GetData(string fileName)
+    IEnumerable<char[]> GetData()
             => InputAsLines.Select(s => s.Remove(1,1).ToArray());
 }

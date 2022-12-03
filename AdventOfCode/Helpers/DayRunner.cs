@@ -5,12 +5,14 @@ namespace AdventOfCode.Helpers;
 
 public static class DayRunner
 {
-    public static object PerformPartOne<TDay>() where TDay: IDay 
-        => Activator.CreateInstance<TDay>().PerformPartOne();
+    public static IDay CreateInstance(Type dayType)
+        => Activator.CreateInstance(dayType) as IDay ?? throw new ArgumentException($"Invalid type {dayType.Name}");
 
-    public static object PerformPartTwo<TDay>() where TDay : IDay
-        => Activator.CreateInstance<TDay>().PerformPartTwo();
+    public static Summary Benchmark(Type dayType)
+    {
+        var typeString = $"AdventOfCode.Helpers.DayBenchmarkWrapper`1[[{dayType.Name}, AdventOfCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]";
+        var benchmarkType = Type.GetType(typeString);
 
-    public static Summary Benchmark<TDay>() where TDay : IDay
-        => BenchmarkRunner.Run<DayBenchmarkWrapper<TDay>>();
+        return BenchmarkRunner.Run(benchmarkType);
+    }
 }
