@@ -5,15 +5,14 @@ public class Day_3 : BaseDay, IDay
 {
     record Sack(char[] All)
     {
-        int middle = 0;
-        int Middle => middle > 0 ? middle : middle = All.Length/2;
+        int Middle => All.Length/2;
         char[] CompartmentOne => All[0 ..Middle];
         char[] CompartmentTwo => All[Middle..];
 
         public static char GetCommonItem(Sack sack)
         {
-            return sack.CompartmentOne.Distinct()
-                .Intersect(sack.CompartmentTwo.Distinct())
+            return sack.CompartmentOne
+                .Intersect(sack.CompartmentTwo)
                 .Single();
         }
     }
@@ -27,16 +26,10 @@ public class Day_3 : BaseDay, IDay
     {
         public static char GetCommonItem(Sack[] group)
         {
-            IEnumerable<char> items = null;
-            foreach(var elf in group)
+            IEnumerable<char> items = group[0].All;
+            foreach(var elf in group.Skip(1))
             {
-                if (items == null)
-                {
-                    items = elf.All;
-                    continue;
-                }
-                
-                items = items.Intersect(elf.All.AsEnumerable());
+                items = items.Intersect(elf.All);
             }
             return items.Single();
         }
