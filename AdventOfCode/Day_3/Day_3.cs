@@ -50,8 +50,7 @@ public class Day_3 : BaseDay, IDay
             .Select(l => new Sack(l.ToArray()))
             .Chunk(3)
             .Select(ElfGroup.GetCommonItem)
-            .Select(Item.GetPriority)
-            .Sum();
+            .Sum(Item.GetPriority);
 
     }
 }
