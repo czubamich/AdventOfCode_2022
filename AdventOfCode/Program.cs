@@ -2,9 +2,12 @@
 
 string dayNumberText = GetDay();
 
-while (int.TryParse(dayNumberText, out int dayNumber))
+while (!dayNumberText.StartsWith("q"))
 {
-    AdventOfCodeRunner.Run(dayNumber);
+    if(int.TryParse(dayNumberText, out int dayNumber))
+        AdventOfCodeRunner.Run(dayNumber);
+    else if (dayNumberText.StartsWith("b"))
+        AdventOfCodeRunner.RunBenchmarks();
 
     Console.WriteLine("---------------------");
     dayNumberText = GetDay();

@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Infrastructure;
 using Microsoft.Diagnostics.Tracing.Parsers.FrameworkEventSource;
+using System.Reflection;
 
 public static class AdventOfCodeRunner
 {
@@ -31,6 +32,18 @@ public static class AdventOfCodeRunner
         var summary = DayRunner.Benchmark(dayType);
     }
 
+    public static void RunBenchmarks()
+    {
+        var dayTypes = typeof(Day_)
+            .Assembly
+            .GetTypes()
+            .Where(t => t.IsAssignableTo(typeof(IDay)) && !t.IsAbstract && !t.IsInterface && t != typeof(Day_))
+            .OrderBy(t => int.Parse(t.Name.Remove(0,4)))
+            .ToArray();
+
+        var summary = DayRunner.Benchmark(dayTypes);
+    }
+
     private static void DisplayResult(string part, object result)
     {
         var resultText = result switch
@@ -43,3 +56,4 @@ public static class AdventOfCodeRunner
         Console.WriteLine($"{part}: {resultText}");
     }
 }
+
