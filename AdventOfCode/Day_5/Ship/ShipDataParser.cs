@@ -2,32 +2,25 @@
 
 public class ShipDataParser
 {
+    const int CRATE_COUNT = 9;
+    static int Column(int i) => 1 + i * 4;
+
     public static Ship Parse(IEnumerable<string> shipData)
     {
-        var shipDataEnumerator = shipData
-            .Reverse()
-            .Skip(1)
-            .GetEnumerator();
-        shipDataEnumerator.MoveNext();
+        var dataArray = shipData.ToArray();
 
-        //get number of crates
-        var cratesCount = 9;
+        var crates = new Stack<char>[CRATE_COUNT];
 
-        //cratesListText.
-        var crates = Enumerable.Repeat(0, cratesCount)
-            .Select(x => new Stack<char>())
-            .ToArray();
-
-        while (shipDataEnumerator.MoveNext())
+        for(int i = 0; i < CRATE_COUNT; i++)
         {
-            shipDataEnumerator.Current
-                .Chunk(4)
-                .Select(s => s[1])
-                .ForEach((d, i) =>
-                {
-                    if(char.IsLetterOrDigit(d))
-                        crates[i].Push(d);
-                });
+            crates[i] = new Stack<char>();
+            for (int j=dataArray.Length-3; j>=0; j--)
+            {
+                var x = dataArray[j][Column(i)];
+                if (x == ' ')
+                    continue;
+                crates[i].Push(x);
+            }
         }
 
         return new Ship(crates);
