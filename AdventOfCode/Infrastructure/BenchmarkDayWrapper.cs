@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace AdventOfCode.Helpers;
+namespace AdventOfCode.Infrastructure;
 
 [MemoryDiagnoser]
 public class DayBenchmarkWrapper<TDay> where TDay : IDay

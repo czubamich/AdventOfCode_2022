@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Helpers;
+﻿namespace AdventOfCode.Infrastructure;
 
 public abstract class BaseDay
 {

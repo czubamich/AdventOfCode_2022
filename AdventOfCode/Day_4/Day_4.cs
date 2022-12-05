@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Helpers;
+﻿using AdventOfCode.Infrastructure;
 using MoreLinq;
 
 public class Day_4 : BaseDay, IDay

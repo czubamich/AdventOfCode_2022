@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Helpers;
+﻿using AdventOfCode.Infrastructure;
 
 string dayNumberText = GetDay();
 

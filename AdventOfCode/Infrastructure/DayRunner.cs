@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 
-namespace AdventOfCode.Helpers;
+namespace AdventOfCode.Infrastructure;
 
 public static class DayRunner
 {
@@ -10,7 +10,7 @@ public static class DayRunner
 
     public static Summary Benchmark(Type dayType)
     {
-        var typeString = $"AdventOfCode.Helpers.DayBenchmarkWrapper`1[[{dayType.Name}, AdventOfCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]";
+        var typeString = $"AdventOfCode.Infrastructure.DayBenchmarkWrapper`1[[{dayType.Name}, AdventOfCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]";
         var benchmarkType = Type.GetType(typeString);
 
         return BenchmarkRunner.Run(benchmarkType);
