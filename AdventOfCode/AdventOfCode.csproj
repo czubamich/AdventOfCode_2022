@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Day_7\Day_7.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data\Day_2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -35,6 +41,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\Day_6.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Day_7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
