@@ -12,7 +12,7 @@ public class Day_7 : BaseDay, IDay
         fileSystem = new FileSystem();
         var currentDirectory = fileSystem.Root;
 
-        foreach (var cmd in CommandLineProcessor.Begin(InputAsLines))
+        foreach (var cmd in CommandLineProcessor.Process(InputAsLines))
             cmd.Execute(ref currentDirectory);
     }
 
@@ -25,8 +25,8 @@ public class Day_7 : BaseDay, IDay
 
     public object PerformPartTwo()
     {
-        var totalUsed = TotalDiscSpace - fileSystem.Root.DiscSpace;
-        var discSpaceNeeded = UpdateDiscSpace - totalUsed;
+        var totalEmpty = TotalDiscSpace - fileSystem.Root.DiscSpace;
+        var discSpaceNeeded = UpdateDiscSpace - totalEmpty;
 
         return fileSystem
             .FindDirectories(d => d.DiscSpace >= discSpaceNeeded)

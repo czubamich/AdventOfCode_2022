@@ -6,17 +6,19 @@ public class Day_6 : BaseDay, IDay
 {
     public object PerformPartOne()
     {
-        var dataAsArray = InputAsText.ToCharArray();
-        int i = 4;
-        while (dataAsArray[(i - 4)..i++].ToHashSet().Count != 4) ;
-        return --i;
+        return GetFirstGroupDistinctIndex(InputAsText, 4);
     }
 
     public object PerformPartTwo()
     {
-        var dataAsArray = InputAsText.ToCharArray();
-        int i = 14;
-        while (dataAsArray[(i - 14)..i++].ToHashSet().Count != 14) ;
+        return GetFirstGroupDistinctIndex(InputAsText, 14);
+    }
+
+    private static int GetFirstGroupDistinctIndex(string input, int requiredDistinct)
+    {
+        var dataAsArray = input.ToCharArray();
+        int i = requiredDistinct;
+        while (dataAsArray[(i - requiredDistinct)..i++].ToHashSet().Count != requiredDistinct);
         return --i;
     }
 }

@@ -1,4 +1,4 @@
-﻿public class StepsFactoryBase
+﻿public class StepsProcessorBase
 {
     public static int[] Parse(string stepData)
     {

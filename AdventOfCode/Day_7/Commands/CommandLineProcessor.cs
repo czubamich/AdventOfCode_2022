@@ -4,7 +4,7 @@ namespace AdventOfCode;
 
 public class CommandLineProcessor
 {
-    public static IEnumerable<ICommand> Begin(IEnumerable<string> commandLine)
+    public static IEnumerable<ICommand> Process(IEnumerable<string> commandLine)
     {
         var enumerator = commandLine.GetEnumerator();
         enumerator.MoveNext();

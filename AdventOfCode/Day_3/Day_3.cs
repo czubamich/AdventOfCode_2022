@@ -40,8 +40,7 @@ public class Day_3 : BaseDay, IDay
         return InputAsLines
             .Select(l => new Sack(l.ToArray()))
             .Select(Sack.GetCommonItem)
-            .Select(Item.GetPriority)
-            .Sum();
+            .Sum(Item.GetPriority);
     }
 
     public object PerformPartTwo()

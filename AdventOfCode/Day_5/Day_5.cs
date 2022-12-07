@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Infrastructure;
 using MoreLinq;
+using System.Security.Cryptography;
 
 public class Day_5 : BaseDay, IDay
 {
@@ -7,9 +8,8 @@ public class Day_5 : BaseDay, IDay
     {
         Ship ship = ShipDataParser.Parse(ShipData);
 
-        StepsData
-            .Select(CrateMover9000StepsFactory.Create)
-            .ForEach(step => step.Execute(ship));
+        foreach (var step in CrateMover9000StepsProcessor.Process(StepsData))
+            step.Execute(ship);
         
         return ship.Crates
             .Select(c => c.Peek());
@@ -19,9 +19,8 @@ public class Day_5 : BaseDay, IDay
     {
         Ship ship = ShipDataParser.Parse(ShipData);
 
-        StepsData
-            .Select(CrateMover9001StepsFactory.Create)
-            .ForEach(step => step.Execute(ship));
+        foreach(var step in CrateMover9001StepsProcessor.Process(StepsData))
+            step.Execute(ship);
 
         return ship.Crates
             .Select(c => c.Peek());

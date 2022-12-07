@@ -1,17 +1,22 @@
 ﻿using AdventOfCode.Helpers;
 using MoreLinq;
 
-public class CrateMover9001StepsFactory : StepsFactoryBase
+public class CrateMover9001StepsProcessor : StepsProcessorBase
 {
-    public static Step Create(string stepData)
+    public static IEnumerable<Step> Process(IEnumerable<string> stepData)
     {
-        var stepRawData = Parse(stepData);
+        var enumerator = stepData.GetEnumerator();
 
-        return new CrateMover9001Step(
-            stepRawData[1]-1,
-            stepRawData[2]-1,
-            stepRawData[0]
-            );
+        while(enumerator.MoveNext())
+        {
+            var stepRawData = Parse(enumerator.Current);
+
+            yield return new CrateMover9001Step(
+                stepRawData[1] - 1,
+                stepRawData[2] - 1,
+                stepRawData[0]
+                );
+        }
     }
 }
 public record CrateMover9001Step(int from, int to, int amount) : Step(from, to, amount)
